@@ -1,0 +1,1 @@
+export const POST_SAVE = "/api/v1/posts";

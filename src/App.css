@@ -42,3 +42,34 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.App{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+body{
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+}
+
+/** 게시글 등록 **/
+.post__write{
+	width: 1400px;
+	height: 800px;
+	padding: 20px;
+}
+
+.post__write h1{
+	font-size: 40px;
+	font-weight: 800;
+	margin-bottom: 20px;
+}
+
+.post__write__bottom {
+	padding: 15px;
+}
+.post__write__bottom button{
+	margin-right: 10px;
+}

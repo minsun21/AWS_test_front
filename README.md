@@ -9,3 +9,7 @@
 5. npm i redux-devtools-extension
 
 6. npm i redux-thunk
+
+7. npm i axios
+
+8. npm install @material-ui/lab
