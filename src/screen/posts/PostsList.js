@@ -3,19 +3,19 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
-import { POST_SAVE, POST_LIST, POST_REMOVE } from "../../common/Url";
+import { POST_SAVE, POST_LIST, POST_REMOVE, POST_EDIT } from "../../common/Url";
 import { RESULT_SUCCESS } from "../../common/Constants";
 
 
 function PostsList() {
     const history = useHistory();
-    const [tableInfo, settableInfo] = useState([]);
-    const [selection, setSelection] = useState('');
+    const [tableInfo, setTableInfo] = useState([]);
+    const [selection, setSelection] = useState([]);
 
     useEffect(() => {
         axios.get(POST_LIST).then(res => {
             if (res.data.result === RESULT_SUCCESS)
-                settableInfo(res.data.data);
+                setTableInfo(res.data.data);
             else
                 alert(res.result);
         })
@@ -34,29 +34,32 @@ function PostsList() {
     }
 
     const editPost = () => {
-
-    }
-
-    const removePost = () => {
-        if (selection && selection.length === 1) {
-            const url = POST_REMOVE + `/${selection}`;
-            axios.put(url).then(res => {
-                if (res.data.result === RESULT_SUCCESS)
-                    settableInfo(res.data.data);
-                else
-                    alert(res.result);
-            })
+        if (selection && selection.rowIds.length === 1) {
+            const url = POST_EDIT + `/${selection.rowIds[0]}`;
+            history.push(url);
         } else
             alert('1개만 선택해주세요');
     }
 
+    const removePost = () => {
+        if (selection.length > 0) {
+            axios.post(POST_REMOVE, selection).then(res => {
+                if (res.data.result === RESULT_SUCCESS)
+                    setTableInfo(res.data.data);
+                else
+                    alert(res.result);
+            })
+        } else
+            alert('선택해주세요');
+    }
+
     return (
         <div className="posts">
-            <h1>스프링 부트로 시작하는 웹 서비스</h1>
+            <h1>자유 게시판</h1>
             <Button variant="outlined" color="primary" onClick={goPostsWrite}>글 등록</Button>
-            <div style={{ height: 400, width: '100%', marginTop: '30px', marginBottom: '30px' }}>
+            <div style={{ height: 400, width: '100%', marginTop: '10px', marginBottom: '30px' }}>
                 <DataGrid rows={tableInfo} columns={columns} pageSize={5} checkboxSelection onSelectionChange={(newSelection) => {
-                    setSelection(newSelection.rowIds);
+                    setSelection(newSelection);
                 }} />
             </div>
             <Button variant="outlined" color="primary" onClick={editPost} style={{ marginRight: '10px' }}>수정</Button>
