@@ -29,7 +29,7 @@ function PostWrite() {
         e.preventDefault();
         if (infoCheck()) {
             axios.post(POST_SAVE, inputInfo).then(res => {
-                if (res) { alert('성공'); history.push(ROOT); }
+                if (res) { history.push(ROOT); }
             });
         }
     }
@@ -62,7 +62,7 @@ function PostWrite() {
                     label="작성자"
                     value={inputInfo.author}
                     style={inputStyle}
-                    placeholder="제목을 입력해주세요"
+                    placeholder="작성자를 입력해주세요"
                     fullWidth
                     InputLabelProps={inputLabelProps}
                     onChange={onChangeHandler}
