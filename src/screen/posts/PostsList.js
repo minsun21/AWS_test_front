@@ -25,7 +25,7 @@ function PostsList() {
         { field: 'title', headerName: '제목', width: 130 },
         { field: 'content', headerName: '내용', width: 180 },
         { field: 'author', headerName: '작성자', width: 100 },
-        { field: 'createDate', headerName: '생성일', width: 130 },
+        { field: 'modifedDate', headerName: '날짜', width: 130 },
         { field: 'viewCount', headerName: '조회수', width: 100 },
     ];
 
