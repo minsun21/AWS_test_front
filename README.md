@@ -13,3 +13,5 @@
 7. npm i axios
 
 8. npm install @material-ui/lab
+
+9. npm install @material-ui/data-grid

@@ -5,13 +5,14 @@ import {
   Route,
 } from "react-router-dom";
 import PostWrite from "./screen/posts/PostWrite";
+import PostsList from "./screen/posts/PostsList";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={PostWrite}>
-        </Route>
+        <Route exact path="/api/v1/posts" component={PostWrite} />
+        <Route exact path="/" component={PostsList} />
       </Switch>
     </Router>
 

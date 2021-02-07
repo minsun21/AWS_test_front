@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { POST_SAVE } from "../../common/Url";
+import { ROOT, POST_SAVE } from "../../common/Url";
 
 const inputLabelProps = {
     shrink: true,
@@ -10,6 +11,7 @@ const inputLabelProps = {
 const inputStyle = { margin: 15 }
 
 function PostWrite() {
+    const history = useHistory();
     const init = { title: '', author: '', content: '' };
 
     const [inputInfo, setInputInfo] = useState(init);
@@ -27,7 +29,7 @@ function PostWrite() {
         e.preventDefault();
         if (infoCheck()) {
             axios.post(POST_SAVE, inputInfo).then(res => {
-                if (res) alert('성공');
+                if (res) { alert('성공'); history.push(ROOT); }
             });
         }
     }
@@ -41,9 +43,9 @@ function PostWrite() {
     }
 
     return (
-        <div className="post__write">
+        <div className="posts">
+            <h1>게시글 등록</h1>
             <form onSubmit={submitHandler}>
-                <h1>게시글 등록</h1>
                 <TextField
                     id="title"
                     label="제목"
