@@ -30,7 +30,7 @@ function PostWrite() {
         if (infoCheck()) {
             axios.post(POST_SAVE, inputInfo).then(res => {
                 if (res) { history.push(ROOT); }
-            });
+            }).catch((err) => console.log(err));
         }
     }
 

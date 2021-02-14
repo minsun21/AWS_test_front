@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from "axios";
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import { POST_SAVE, POST_LIST, POST_REMOVE, POST_EDIT } from "../../common/Url";
 import { RESULT_SUCCESS } from "../../common/Constants";
+import { config } from "../../common/Config";
 
 
 function PostsList() {
@@ -12,8 +13,11 @@ function PostsList() {
     const [tableInfo, setTableInfo] = useState([]);
     const [selection, setSelection] = useState([]);
 
+
+
+
     useEffect(() => {
-        axios.get(POST_LIST).then(res => {
+        axios.get(POST_LIST, config).then(res => {
             if (res.data.result === RESULT_SUCCESS)
                 setTableInfo(res.data.data);
             else
@@ -57,6 +61,7 @@ function PostsList() {
         <div className="posts">
             <h1>자유 게시판</h1>
             <Button variant="outlined" color="primary" onClick={goPostsWrite}>글 등록</Button>
+            <Link to="/oauth2/authorization/google" style={{ textDecoration: 'none' }}> <Button variant="outlined" color="primary">Login</Button></Link>
             <div style={{ height: 400, width: '100%', marginTop: '10px', marginBottom: '30px' }}>
                 <DataGrid rows={tableInfo} columns={columns} pageSize={5} checkboxSelection onSelectionChange={(newSelection) => {
                     setSelection(newSelection);
